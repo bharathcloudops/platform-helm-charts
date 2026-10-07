@@ -40,7 +40,7 @@ jobs:
   #============================================================================
   shell:
     name: 02 - Validate Shell Scripts
-    uses: bharathcloudops/github-pipeline-templates/.github/workflows/shell-validate.yml@v0.9.4
+    uses: bharathcloudops/github-pipeline-templates/.github/workflows/shell-validate.yml@v0.9.9
     with:
       template_ref: v0.9.4
   #============================================================================

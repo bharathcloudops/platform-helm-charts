@@ -16,7 +16,11 @@ spec:
   failedJobsHistoryLimit: 3
   jobTemplate:
     spec:
-      backoffLimit: 3
+      # A run that cannot start (for example an image pull failure) must fail
+      # instead of holding the Forbid concurrency slot and blocking later runs.
+      activeDeadlineSeconds: 270
+      backoffLimit: 1
+      ttlSecondsAfterFinished: 3600
       template:
         metadata:
           labels:

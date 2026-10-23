@@ -56,6 +56,19 @@ ingress:
 
 Validate privately held values with `helm template example charts/web-service --namespace example --values /path/to/private-values.yaml`. Do not put credential values in Helm values, command-line `--set`, rendered manifests, GitHub artifacts or logs.
 
+## Pinned Runtime Images
+
+Images are pinned by tag and digest in `charts/wordpress/values.yaml` and refreshed whenever upstream publishes security fixes.
+
+| Component | Image | Version |
+|---|---|---|
+| Nginx | `nginxinc/nginx-unprivileged` | `1.30.6-alpine-slim` |
+| Redis | `redis` | `8.2.10-alpine` |
+| MariaDB | `mariadb` | `12.3.3` |
+| Backup and restore | `restic/restic` | `0.19.1` |
+
+The WordPress application image, including WordPress core and PHP, is built and pinned by each site repository rather than by this chart.
+
 ## Values Reference
 
 | Key | Default | Description |

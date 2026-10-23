@@ -61,6 +61,8 @@ jobs:
         run: |
           reference=$(bash scripts/list-pinned-images.sh | awk -v name="$COMPONENT" '$1 == name {print $2}')
           printf 'reference=%s\n' "$reference" >> "$GITHUB_OUTPUT"
+          ignore="security/trivy-ignore-$COMPONENT.yaml"
+          if [ -f "$ignore" ]; then printf 'ignore=%s\n' "$ignore" >> "$GITHUB_OUTPUT"; else printf 'ignore=\n' >> "$GITHUB_OUTPUT"; fi
 
       - name: 03 - Scan Image
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25
@@ -70,3 +72,4 @@ jobs:
           exit-code: "1"
           ignore-unfixed: true
           severity: CRITICAL,HIGH
+          trivyignores: ${{ steps.image.outputs.ignore }}

@@ -77,6 +77,8 @@ The WordPress application image, including WordPress core and PHP, is built and 
 - the pinned tag was rebuilt upstream and its digest changed, which is how base-image security fixes arrive under an unchanged tag;
 - Trivy finds a fixable critical or high vulnerability in any pinned image.
 
+Accepted findings live in `security/trivy-ignore-<component>.yaml`. Each entry names the vulnerability, states why it is accepted, and carries an `expired_at` date (currently 2026-11-30), after which the scan fails again until the finding is re-reviewed. New vulnerabilities are never ignored. The MariaDB entries apply only to the `gosu` privilege-drop binary, and the Restic entries cover an upstream image that has no newer release.
+
 Fix a failing run by updating the tag and digest in `charts/wordpress/values.yaml`, running validation, and releasing a new chart tag. `scripts/check-latest-versions.sh` and `scripts/list-pinned-images.sh` can be run locally.
 
 ## Core Upgrades And Cron

@@ -1,0 +1,86 @@
+#==============================================================================
+# REVIEWED TRIVY EXCEPTIONS FOR RESTIC
+#==============================================================================
+
+vulnerabilities:
+  - id: CVE-2026-107891
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-111943
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-14456
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-32316
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-33818
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-39821
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-39822
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-40164
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-46600
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-56851
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-56852
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-56853
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-56854
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-56858
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-56859
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-56860
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-56862
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-59999
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-60000
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-60002
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-63209
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-78667
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-78669
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-84304
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-84445
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: CVE-2026-97031
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30
+  - id: GHSA-hrxh-6v49-42gf
+    statement: "Reviewed 2026-10-23. Upstream restic 0.19.1 has no rebuilt image or newer release. The deployment uses only the S3 backend against our own repository; the OpenSSH client packages and jq are not used. Re-review when restic publishes a fix."
+    expired_at: 2026-11-30

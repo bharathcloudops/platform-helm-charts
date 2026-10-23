@@ -49,6 +49,8 @@ spec:
               image_version=$(php -r 'include "/usr/src/wordpress/wp-includes/version.php"; echo $wp_version;')
               if [ "$installed_version" != "$image_version" ]; then
                 tar --create --file - --directory /usr/src/wordpress --exclude=./wp-content --exclude=./wp-config.php . | tar --extract --file - --directory /var/www/html
+                find /var/www/html -path /var/www/html/wp-content -prune -o ! -name wp-config.php -exec chmod u+rwX,g+rX,o+rX {} +
+                chmod 2775 /var/www/html
               fi
               echo "wordpress_core=$image_version previous=${installed_version:-none}"
               chmod -R u+rwX /var/www/html

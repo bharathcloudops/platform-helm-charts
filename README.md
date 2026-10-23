@@ -69,6 +69,12 @@ Images are pinned by tag and digest in `charts/wordpress/values.yaml` and refres
 
 The WordPress application image, including WordPress core and PHP, is built and pinned by each site repository rather than by this chart.
 
+## Core Upgrades And Cron
+
+WordPress core lives on its own persistent volume, and the upstream image entrypoint copies core only when that volume is empty. The `prepare-wordpress-webroot` init container therefore compares the core version in the image with the version on the volume and, when they differ, copies the new core files over the volume without touching `wp-content` or `wp-config.php`. Image upgrades now update WordPress core on the next rollout, and the init container logs `wordpress_core=<image> previous=<installed>`.
+
+The `wordpress-cron` Job uses the same private image as the deployment, so it carries the same `imagePullSecrets`. Without them the Job cannot pull the image, stays in `ImagePullBackOff`, and holds the `Forbid` concurrency slot.
+
 ## Values Reference
 
 | Key | Default | Description |

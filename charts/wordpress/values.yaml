@@ -51,8 +51,8 @@ nginx:
   clientMaxBodySize: 128m
   image:
     repository: nginxinc/nginx-unprivileged
-    tag: 1.29.4-alpine-slim
-    digest: sha256:93a0458087e8dd06e7e59ceaeb3c54c9e73f64730282ab9387c3fe47a42bfc99
+    tag: 1.30.6-alpine-slim
+    digest: sha256:5d8bb9437d74a600ec5dbf90c035451c724dc33eac8d3a71078f6f8612c345f6
     pullPolicy: IfNotPresent
   resources:
     requests:
@@ -65,8 +65,8 @@ nginx:
 redis:
   image:
     repository: redis
-    tag: 8.2.1-alpine
-    digest: sha256:987c376c727652f99625c7d205a1cba3cb2c53b92b0b62aade2bd48ee1593232
+    tag: 8.2.10-alpine
+    digest: sha256:d1389b3f3f981460b9b0918c4d7390c6e9decb8c69b9f09a02e1b6fd7554ade7
     pullPolicy: IfNotPresent
   resources:
     requests:
@@ -83,7 +83,7 @@ mariadb:
   image:
     repository: mariadb
     tag: 12.3.3
-    digest: sha256:adbf5727f3d6ffa0ea11109f948247d88d110edd3f43f8d4c134c0a09060c5f3
+    digest: sha256:99c125f103f5d081ebbc9ffe064e63daf7f688ac33a5f7f29af2d7260a96debf
     pullPolicy: IfNotPresent
   database: wordpress
   username: wordpress

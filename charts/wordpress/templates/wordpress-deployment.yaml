@@ -45,6 +45,12 @@ spec:
               chown -R 0:0 /var/www/html /extensions /nginx-cache
               mkdir -p /extensions/themes /extensions/plugins /nginx-cache
               rm -f /var/www/html/wp-config.php
+              installed_version=$(php -r 'if (is_readable("/var/www/html/wp-includes/version.php")) { include "/var/www/html/wp-includes/version.php"; echo $wp_version; }')
+              image_version=$(php -r 'include "/usr/src/wordpress/wp-includes/version.php"; echo $wp_version;')
+              if [ "$installed_version" != "$image_version" ]; then
+                tar --create --file - --directory /usr/src/wordpress --exclude=./wp-content --exclude=./wp-config.php . | tar --extract --file - --directory /var/www/html
+              fi
+              echo "wordpress_core=$image_version previous=${installed_version:-none}"
               chmod -R u+rwX /var/www/html
               chown -R 33:33 /var/www/html
               if [ -z "$(find /extensions/themes -mindepth 1 -maxdepth 1 -type d -print -quit)" ]; then

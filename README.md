@@ -75,6 +75,14 @@ WordPress core lives on its own persistent volume, and the upstream image entryp
 
 The `wordpress-cron` Job uses the same private image as the deployment, so it carries the same `imagePullSecrets`. Without them the Job cannot pull the image, stays in `ImagePullBackOff`, and holds the `Forbid` concurrency slot.
 
+## Release Notes
+
+| Tag | Status |
+|---|---|
+| `v0.2.11` | Do not use. The core sync copied owner-only files and stopped Nginx serving the site. |
+| `v0.2.12` | Do not use. Tagged in error before the permission fix was merged, so it is identical to `v0.2.11` in behaviour. Protected release tags cannot be removed. |
+| `v0.2.13` | Use this release or later. Adds the core sync permission fix and the cron image pull secret. |
+
 ## Values Reference
 
 | Key | Default | Description |

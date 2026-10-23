@@ -69,6 +69,16 @@ Images are pinned by tag and digest in `charts/wordpress/values.yaml` and refres
 
 The WordPress application image, including WordPress core and PHP, is built and pinned by each site repository rather than by this chart.
 
+## Image Drift And Vulnerability Checks
+
+`02 - Check Image Drift And Vulnerabilities` runs daily at 03:17 UTC and on demand. It fails, and so raises the existing GitHub Actions failure alert, when:
+
+- a newer patch release exists upstream for the pinned Nginx stable, Redis, or MariaDB minor line, or for Restic;
+- the pinned tag was rebuilt upstream and its digest changed, which is how base-image security fixes arrive under an unchanged tag;
+- Trivy finds a fixable critical or high vulnerability in any pinned image.
+
+Fix a failing run by updating the tag and digest in `charts/wordpress/values.yaml`, running validation, and releasing a new chart tag. `scripts/check-latest-versions.sh` and `scripts/list-pinned-images.sh` can be run locally.
+
 ## Core Upgrades And Cron
 
 WordPress core lives on its own persistent volume, and the upstream image entrypoint copies core only when that volume is empty. The `prepare-wordpress-webroot` init container therefore compares the core version in the image with the version on the volume and, when they differ, copies the new core files over the volume without touching `wp-content` or `wp-config.php`. Image upgrades now update WordPress core on the next rollout, and the init container logs `wordpress_core=<image> previous=<installed>`. Core files in the image are owner-only, so the sync grants group and other read afterwards; Nginx runs as a member of the WordPress group and is denied by group permissions when the group bits are empty, which stops the site serving.

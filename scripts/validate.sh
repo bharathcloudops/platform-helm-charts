@@ -98,6 +98,8 @@ operations_policy=$(sed -n '/name: wordpress-operations/,/^---$/p' <<< "$wordpre
 grep -Fq -- '- backup-verify' <<< "$operations_policy"
 grep -Fq 'port: 443' <<< "$operations_policy"
 if grep -Fq 'bharathcoudops' <<< "$wordpress"; then exit 1; fi
+test -x "$root/scripts/check-latest-versions.sh"
+grep -Fq 'cron: "17 3 * * *"' "$root/.github/workflows/image-drift.yaml"
 grep -Fq 'chmod u+rwX,g+rX,o+rX' <<< "$wordpress"
 grep -Fq 'wordpress_core=' <<< "$wordpress"
 

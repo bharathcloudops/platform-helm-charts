@@ -1,0 +1,72 @@
+#==============================================================================
+# PINNED IMAGE DRIFT AND VULNERABILITY CHECKS
+#==============================================================================
+
+name: 02 - Check Image Drift And Vulnerabilities
+
+#==============================================================================
+# DAILY SCHEDULE AND MANUAL RUNS
+#==============================================================================
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: image-drift-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  #============================================================================
+  # NEWER UPSTREAM TAGS OR REBUILT DIGESTS
+  #============================================================================
+  drift:
+    name: 01 - Check Pinned Image Drift
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: 01 - Checkout Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: 02 - Compare Pins With Upstream
+        run: bash scripts/check-latest-versions.sh
+
+  #============================================================================
+  # FIXABLE CRITICAL AND HIGH VULNERABILITIES IN EACH PINNED IMAGE
+  #============================================================================
+  scan:
+    name: 02 - Scan ${{ matrix.component }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        component: [nginx, redis, mariadb, restic]
+    steps:
+      - name: 01 - Checkout Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: 02 - Resolve Pinned Image
+        id: image
+        env:
+          COMPONENT: ${{ matrix.component }}
+        run: |
+          reference=$(bash scripts/list-pinned-images.sh | awk -v name="$COMPONENT" '$1 == name {print $2}')
+          printf 'reference=%s\n' "$reference" >> "$GITHUB_OUTPUT"
+
+      - name: 03 - Scan Image
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25
+        with:
+          image-ref: ${{ steps.image.outputs.reference }}
+          format: table
+          exit-code: "1"
+          ignore-unfixed: true
+          severity: CRITICAL,HIGH

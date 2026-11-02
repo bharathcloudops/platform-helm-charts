@@ -83,7 +83,7 @@ Fix a failing run by updating the tag and digest in `charts/wordpress/values.yam
 
 ## Core Upgrades And Cron
 
-WordPress core lives on its own persistent volume, and the upstream image entrypoint copies core only when that volume is empty. The `prepare-wordpress-webroot` init container therefore compares the core version in the image with the version on the volume and, when they differ, copies the new core files over the volume without touching `wp-content` or `wp-config.php`. Image upgrades now update WordPress core on the next rollout, and the init container logs `wordpress_core=<image> previous=<installed>`. Core files in the image are owner-only, so the sync grants group and other read afterwards; Nginx runs as a member of the WordPress group and is denied by group permissions when the group bits are empty, which stops the site serving.
+WordPress core lives on its own persistent volume, and the upstream image entrypoint copies core only when that volume is empty. The `prepare-wordpress-webroot` init container compares the core version in the image with the version on the volume and, when they differ, copies the new core files over the volume without touching `wp-content` or `wp-config.php`. It reapplies group and other read/execute permissions to core files on every start, repairing owner-only files left on existing volumes even when the image and installed WordPress versions match. The init container logs `wordpress_core=<image> previous=<installed>`. Nginx runs as a member of the WordPress group and requires those group read bits to serve the site.
 
 The `wordpress-cron` Job uses the same private image as the deployment, so it carries the same `imagePullSecrets`. Without them the Job cannot pull the image, stays in `ImagePullBackOff`, and holds the `Forbid` concurrency slot.
 
@@ -91,9 +91,10 @@ The `wordpress-cron` Job uses the same private image as the deployment, so it ca
 
 | Tag | Status |
 |---|---|
+| `v0.2.14` | Reapplies core read permissions on every init so existing owner-only files are repaired. |
 | `v0.2.11` | Do not use. The core sync copied owner-only files and stopped Nginx serving the site. |
 | `v0.2.12` | Do not use. Tagged in error before the permission fix was merged, so it is identical to `v0.2.11` in behaviour. Protected release tags cannot be removed. |
-| `v0.2.13` | Use this release or later. Adds the core sync permission fix and the cron image pull secret. |
+| `v0.2.13` | Do not use for existing volumes with owner-only core files; its permission fix runs only when the WordPress core version changes. |
 
 ## Values Reference
 

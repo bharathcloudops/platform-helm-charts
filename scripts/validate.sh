@@ -88,7 +88,9 @@ grep -Fq "define('WP_MEMORY_LIMIT', '192M');" <<< "$wordpress_custom"
 grep -Fq 'client_max_body_size 64m;' <<< "$wordpress_custom"
 chmod_line=$(grep -nF 'chmod -R u+rwX /var/www/html' <<< "$wordpress" | cut -d: -f1)
 chown_line=$(grep -nF 'chown -R 33:33 /var/www/html' <<< "$wordpress" | cut -d: -f1)
-(( chmod_line < chown_line ))
+core_log_line=$(grep -nF 'echo "wordpress_core=' <<< "$wordpress" | cut -d: -f1)
+core_permissions_line=$(grep -nF 'find /var/www/html -path /var/www/html/wp-content -prune -o ! -name wp-config.php -exec chmod u+rwX,g+rX,o+rX {} +' <<< "$wordpress" | cut -d: -f1)
+(( core_log_line < core_permissions_line && core_permissions_line < chmod_line && chmod_line < chown_line ))
 grep -Fq 'name: wordpress-backup-verify-validation' <<< "$wordpress_verify"
 grep -Fq 'name: XDG_CACHE_HOME' <<< "$wordpress_verify"
 grep -Fq 'value: /tmp' <<< "$wordpress_verify"
